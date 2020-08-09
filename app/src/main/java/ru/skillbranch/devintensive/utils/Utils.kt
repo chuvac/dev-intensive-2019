@@ -66,7 +66,7 @@ object Utils {
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
-        var initials: String? = "${firstName?.first()}${lastName?.first()}".trim()
+        var initials: String? = "${firstName?.firstOrNull() ?: ""}${lastName?.firstOrNull() ?: ""}".trim()
         if (initials == "") return null
         return initials
     }
