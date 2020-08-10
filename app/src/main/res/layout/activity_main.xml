@@ -52,7 +52,7 @@
             android:layout_height="@dimen/btn_size_24"
             android:src="@drawable/ic_baseline_send_24"
             android:layout_gravity="center"
-            android:layout_marginRight="@dimen/spacing_normal_16"/>
+            android:layout_marginEnd="@dimen/spacing_normal_16"/>
 
     </LinearLayout>
 

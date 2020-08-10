@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         sendBtn.setOnClickListener(this)
         messageEt.setOnEditorActionListener {_, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
+                hideKeyboard()
                 onClick(sendBtn)
                 return@setOnEditorActionListener true
             }
@@ -86,9 +87,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val (r, g, b) = color
             benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
             textTxt.text = phrase
-            Log.d("M_MainActivity", isKeyboardClosed().toString())
-            hideKeyboard()
-            Log.d("M_MainActivity", isKeyboardOpen().toString())
         }
     }
 
