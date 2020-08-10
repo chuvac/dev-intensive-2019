@@ -15,10 +15,11 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         when(question) {
             Question.NAME -> if(!answer.first().isUpperCase()) return "Имя должно начинаться с заглавной буквы\n${question.question}" to status.color
             Question.PROFESSION -> if (!answer.first().isLowerCase()) return "Профессия должна начинаться со строчной буквы\n${question.question}" to status.color
-            Question.MATERIAL -> if (answer.contains("""\d+""")) return "Материал не должен содержать цифр\n${question.question}" to status.color
-            Question.BDAY -> if (answer.contains("""[^\d]+""")) return "Год моего рождения должен содержать только цифры\n${question.question}" to status.color
-            Question.SERIAL -> if (!answer.contains("""\d{7}""") && answer.length != 7)"Серийный номер содержит только цифры, и их 7\n${question.question}" to status.color
-            Question.IDLE -> return "Отлично - ты справился\nНа этом все, вопросов больше нет" to status.color
+            Question.MATERIAL -> if (answer.contains("\\d".toRegex())) return "Материал не должен содержать цифр\n${question.question}" to status.color
+            Question.BDAY -> if (answer.contains("""[^\d]+""".toRegex())) return "Год моего рождения должен содержать только цифры\n${question.question}" to status.color
+            Question.SERIAL -> if (answer.length != 7) return "Серийный номер содержит только цифры, и их 7\n${question.question}" to status.color
+            else if (!answer.contains("""\d{7}""".toRegex())) return "Серийный номер содержит только цифры, и их 7\n${question.question}" to status.color
+            Question.IDLE -> return "На этом все, вопросов больше нет" to status.color
         }
         return if(question.answers.contains(answer)){
             question = question.nextQuestion()
@@ -29,7 +30,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                 question = Question.NAME
                 "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
             }
-            else "Это не правильный ответ!\n${question.question}" to status.color
+            else "Это неправильный ответ\n${question.question}" to status.color
         }
     }
 
