@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Dev-intensive</string>
+    <string name="send_hint">Введите текст</string>
 </resources>
